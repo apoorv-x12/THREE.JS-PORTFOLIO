@@ -77,8 +77,8 @@ function planetMaker(){
 
 	return myPlanet;
 	}
-
-const k=15;
+	
+//const k=15;
 for (let i=0; i<4;i++) {
 const myPlanet =planetMaker();
 const planetTexture = new THREE.TextureLoader().load( `./img/${planetNames[i]}.jpg` );
@@ -103,7 +103,23 @@ scene.add(myPlanet1);
 
 
 // addEventListeners
-function camMove(){
+window.addEventListener('scroll',()=>{
+const t = document.body.getBoundingClientRect().top;
+	apPlanets.forEach(x=>{
+		    x.rotation.x+=0.01;
+			x.rotation.y+=0.01;
+			x.rotation.z+=0.01;
+	})
+    	 myAvatar.rotation.y += 0.01;
+         myAvatar.rotation.z += 0.01;
+	camera.position.z = t * -0.1;
+    camera.position.x = t * -0.02;
+    camera.rotation.y = t * -0.2;
+})
+
+/* 
+// WAY 2 TO ADD EVENT LISTENER 
+function canMove(){
 	const t = document.body.getBoundingClientRect().top;
 	apPlanets.forEach(x=>{
 		    x.rotation.x+=0.01;
@@ -116,7 +132,10 @@ function camMove(){
     camera.position.x = t * -0.02;
     camera.rotation.y = t * -0.2;
    }
-document.body.onscroll=camMove;
+//document.body.onscroll=camMove; // might not work properly
+window.onscroll=canMove; // best as window represent viewport
+// ALSO instead of document.body.onscroll window.onscroll is better to attach event to
+*/
 
 // animate
 function animate() {
@@ -137,6 +156,5 @@ function animate() {
 	renderer.render( scene, camera );
 }
 animate();
-
 
 //console.log(apPlanets)
