@@ -101,8 +101,8 @@ myPlanet1.position.z=-38;
 scene.add(myPlanet1);
 */
 
-// addEventListeners
 
+// addEventListeners
 function camMove(){
 	const t = document.body.getBoundingClientRect().top;
 	apPlanets.forEach(x=>{
